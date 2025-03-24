@@ -14,7 +14,9 @@
         </a-assets>
 
         <!-- Камера с возможностью крутиться -->
-        <a-entity id="camera" camera look-controls wasd-controls position="0 1.6 0"></a-entity>
+        <a-entity id="cameraRig" position="0 1.6 4">
+            <a-entity id="camera" camera look-controls wasd-controls></a-entity>
+        </a-entity>
 
         <!-- 3D-модель -->
         <a-entity 
@@ -24,19 +26,32 @@
             rotation="0 180 0">
         </a-entity>
 
+        <!-- Включаем реальную камеру устройства в фоне -->
+        <a-video id="bgVideo" autoplay="true" width="16" height="9" position="0 1.6 -4"></a-video>
+
         <!-- 360° Сфера -->
         <a-sky id="sky" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"
                radius="10"
-               position="0 1.6 0"
                onclick="enterSphere()">
         </a-sky>
     </a-scene>
 
     <script>
         function enterSphere() {
-            let camera = document.querySelector("#camera");
-            camera.setAttribute("position", "0 1.6 0"); // Перемещаем внутрь
+            let cameraRig = document.querySelector("#cameraRig");
+            cameraRig.setAttribute("position", "0 1.6 0"); // Перемещаем внутрь сферы
         }
+
+        // Включаем доступ к камере устройства
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                let video = document.querySelector("#bgVideo");
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(function (err) {
+                console.error("Ошибка доступа к камере:", err);
+            });
     </script>
 </body>
 </html>
