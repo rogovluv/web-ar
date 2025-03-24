@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Камера с возможностью вращения -->
+      <a-camera position="0 1.6 3">
+        <a-cursor></a-cursor>
+      </a-camera>
+
+      <!-- 3D-модель -->
+      <a-entity 
+        gltf-model="/assets/world.glb" 
+        position="0 0 -2" 
+        scale="1 1 1"
+        rotation="0 180 0">
+      </a-entity>
+
+      <!-- Сфера 360° -->
+      <a-sky src="https://cdn.jsdelivr.net/gh/ТВОЙ_ГИТХАБ_ЛОГИН/РЕПО/assets/background.jpg"></a-sky>
+    </a-scene>
+  </body>
+</html>
