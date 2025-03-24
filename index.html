@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebAR с 3D-моделью</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <a-scene>
-      <!-- Камера с возможностью вращения -->
-      <a-camera position="0 1.6 3">
-        <a-cursor></a-cursor>
-      </a-camera>
+        <a-assets>
+            <!-- Подключаем модель -->
+            <a-asset-item id="model" src="world.glb"></a-asset-item>
+        </a-assets>
 
-      <!-- 3D-модель -->
-      <a-entity 
-        gltf-model="/assets/world.glb" 
-        position="0 0 -2" 
-        scale="1 1 1"
-        rotation="0 180 0">
-      </a-entity>
+        <!-- Камера -->
+        <a-camera position="0 1.6 3">
+            <a-cursor></a-cursor>
+        </a-camera>
 
-      <!-- Сфера 360° -->
-      <a-sky src="https://cdn.jsdelivr.net/gh/ТВОЙ_ГИТХАБ_ЛОГИН/РЕПО/assets/background.jpg"></a-sky>
+        <!-- Отображение модели -->
+        <a-entity 
+            gltf-model="#model"
+            position="0 0 -2"
+            scale="1 1 1"
+            rotation="0 180 0">
+        </a-entity>
+
+        <!-- Фон 360° (необязательно) -->
+        <a-sky color="#ECECEC"></a-sky>
     </a-scene>
-  </body>
+</body>
 </html>
